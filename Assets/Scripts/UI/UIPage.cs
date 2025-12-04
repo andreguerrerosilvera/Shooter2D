@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 /// <summary>
-/// This class stores relevant information about a page of UI
+///     This class stores relevant information about a page of UI
 /// </summary>
 public class UIPage : MonoBehaviour
 {
@@ -12,12 +9,12 @@ public class UIPage : MonoBehaviour
     public GameObject defaultSelected;
 
     /// <summary>
-    /// Description:
-    /// Sets the selected UI selectable to the default defined by this UIPage
-    /// Inputs:
-    /// none
-    /// Returns:
-    /// void (no return)
+    ///     Description:
+    ///     Sets the selected UI selectable to the default defined by this UIPage
+    ///     Inputs:
+    ///     none
+    ///     Returns:
+    ///     void (no return)
     /// </summary>
     public void SetSelectedUIToDefault()
     {
@@ -26,6 +23,5 @@ public class UIPage : MonoBehaviour
             UIManager.instance.eventSystem.SetSelectedGameObject(null);
             UIManager.instance.eventSystem.SetSelectedGameObject(defaultSelected);
         }
-        
     }
 }

@@ -1,15 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class SetHealthCommand : DeveloperConsoleCommand
 {
     public override bool CallMatchesThisCommand(List<string> commandAsArray)
     {
-        if (commandAsArray[0] == "SetHealth")
-        {
-            return true;
-        }
+        if (commandAsArray[0] == "SetHealth") return true;
         return false;
     }
 
@@ -17,9 +12,9 @@ public class SetHealthCommand : DeveloperConsoleCommand
     {
         if (commandAsArray[0] == "SetHealth" && commandAsArray.Count == 2)
         {
-            string setHealthOutput = "Attempting to set player health to" + commandAsArray[1] + ": \n";
-            int setHealthTo = -1;
-            bool errorEncountered = false;
+            var setHealthOutput = "Attempting to set player health to" + commandAsArray[1] + ": \n";
+            var setHealthTo = -1;
+            var errorEncountered = false;
             try
             {
                 int.TryParse(commandAsArray[1], out setHealthTo);
@@ -34,7 +29,7 @@ public class SetHealthCommand : DeveloperConsoleCommand
             // Attempt to find the player in the scene and adjust their health value
             try
             {
-                Health playerHealth = GameManager.instance.player.GetComponent<Health>();
+                var playerHealth = GameManager.instance.player.GetComponent<Health>();
                 playerHealth.currentHealth = setHealthTo;
             }
             catch
@@ -42,10 +37,8 @@ public class SetHealthCommand : DeveloperConsoleCommand
                 setHealthOutput += "Error finding the health script or player in the scene, could not set health \n";
                 errorEncountered = true;
             }
-            if (!errorEncountered)
-            {
-                setHealthOutput += "No error encountered. Player health should now be changed. \n";
-            }
+
+            if (!errorEncountered) setHealthOutput += "No error encountered. Player health should now be changed. \n";
             developerConsole.outputText.text = setHealthOutput;
         }
         else
@@ -56,17 +49,17 @@ public class SetHealthCommand : DeveloperConsoleCommand
 
     private string OutputFailure()
     {
-        string failureMessage = "Invalid Use of command |SetHealth| \n\n";
+        var failureMessage = "Invalid Use of command |SetHealth| \n\n";
         failureMessage += OutputHelp();
         return failureMessage;
     }
 
     public override string OutputHelp()
     {
-        string helpMessage = "|SetHealth|\n\n" +
-            "To use |SetHealth| order your command as: |SetHealth| |X| \n" +
-            "Where X is an integer value \n" + 
-            "This will set the player health to the provided value if possible \n";
+        var helpMessage = "|SetHealth|\n\n" +
+                          "To use |SetHealth| order your command as: |SetHealth| |X| \n" +
+                          "Where X is an integer value \n" +
+                          "This will set the player health to the provided value if possible \n";
         return helpMessage;
     }
 }

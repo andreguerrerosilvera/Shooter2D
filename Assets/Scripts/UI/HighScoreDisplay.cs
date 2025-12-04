@@ -1,40 +1,34 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 
 /// <summary>
-/// This class inherits from the UIelement class and handles the display of the high score
+///     This class inherits from the UIelement class and handles the display of the high score
 /// </summary>
 public class HighScoreDisplay : UIelement
 {
     [Tooltip("The text UI to use for display")]
-    public TextMeshProUGUI displayText = null;
+    public TextMeshProUGUI displayText;
 
     /// <summary>
-    /// Description:
-    /// Changes the high score display
-    /// Inputs:
-    /// none
-    /// Returns:
-    /// void (no return)
+    ///     Description:
+    ///     Changes the high score display
+    ///     Inputs:
+    ///     none
+    ///     Returns:
+    ///     void (no return)
     /// </summary>
     public void DisplayHighScore()
     {
-        if (displayText != null)
-        {
-            displayText.text = "High: " + GameManager.instance.highScore.ToString();
-        }
+        if (displayText != null) displayText.text = "High: " + GameManager.instance.highScore;
     }
 
     /// <summary>
-    /// Description:
-    /// Overrides the virtual function UpdateUI() of the UIelement class and uses the DisplayHighScore function to update
-    /// Inputs:
-    /// none
-    /// Returns:
-    /// void (no return)
+    ///     Description:
+    ///     Overrides the virtual function UpdateUI() of the UIelement class and uses the DisplayHighScore function to update
+    ///     Inputs:
+    ///     none
+    ///     Returns:
+    ///     void (no return)
     /// </summary>
     public override void UpdateUI()
     {

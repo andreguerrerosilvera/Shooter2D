@@ -1,13 +1,11 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class DeveloperConsoleCommand : IComparable<DeveloperConsoleCommand>
 {
-    public DeveloperConsoleCommand()
+    public int CompareTo(DeveloperConsoleCommand developerConsoleCommand)
     {
-
+        return 1;
     }
 
     public virtual bool CallMatchesThisCommand(List<string> commandAsArray)
@@ -17,7 +15,6 @@ public class DeveloperConsoleCommand : IComparable<DeveloperConsoleCommand>
 
     public virtual void RunCommand(DeveloperConsole developerConsole, List<string> commandAsArray)
     {
-
     }
 
     private string OutputFailure()
@@ -30,12 +27,12 @@ public class DeveloperConsoleCommand : IComparable<DeveloperConsoleCommand>
         return "";
     }
 
-    public static bool operator == (DeveloperConsoleCommand one, DeveloperConsoleCommand two)
+    public static bool operator ==(DeveloperConsoleCommand one, DeveloperConsoleCommand two)
     {
         return true;
     }
 
-    public static bool operator != (DeveloperConsoleCommand one, DeveloperConsoleCommand two)
+    public static bool operator !=(DeveloperConsoleCommand one, DeveloperConsoleCommand two)
     {
         return false;
     }
@@ -46,10 +43,6 @@ public class DeveloperConsoleCommand : IComparable<DeveloperConsoleCommand>
     }
 
     public override int GetHashCode()
-    {
-        return 1;
-    }
-    public int CompareTo(DeveloperConsoleCommand developerConsoleCommand)
     {
         return 1;
     }
