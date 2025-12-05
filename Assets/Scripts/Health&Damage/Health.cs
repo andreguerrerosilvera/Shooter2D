@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 ///     This class handles the health state of a game object.
@@ -6,6 +7,9 @@
 /// </summary>
 public class Health : MonoBehaviour
 {
+    // Evento que se dispara cuando la vida cambia
+    public UnityEvent<int> onHealthChanged;
+
     [Header("Team Settings")] [Tooltip("The team associated with this damage")]
     public int teamId;
 
@@ -58,6 +62,13 @@ public class Health : MonoBehaviour
     private void Start()
     {
         SetRespawnPoint(transform.position);
+
+        // Inicializar el evento si es null
+        if (onHealthChanged == null)
+            onHealthChanged = new UnityEvent<int>();
+
+        // Notificar la vida inicial
+        onHealthChanged.Invoke(currentHealth);
     }
 
     /// <summary>
@@ -113,6 +124,7 @@ public class Health : MonoBehaviour
     {
         transform.position = respawnPosition;
         currentHealth = defaultHealth;
+        onHealthChanged?.Invoke(currentHealth);
     }
 
     /// <summary>
@@ -135,6 +147,7 @@ public class Health : MonoBehaviour
             timeToBecomeDamagableAgain = Time.time + invincibilityTime;
             isInvincableFromDamage = true;
             currentHealth -= damageAmount;
+            onHealthChanged?.Invoke(currentHealth);
             CheckDeath();
         }
     }
@@ -152,6 +165,7 @@ public class Health : MonoBehaviour
     {
         currentHealth += healingAmount;
         if (currentHealth > maximumHealth) currentHealth = maximumHealth;
+        onHealthChanged?.Invoke(currentHealth);
         CheckDeath();
     }
 
